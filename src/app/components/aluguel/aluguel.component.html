@@ -30,7 +30,38 @@
               <h4>
                 {{campo.nome}}
               </h4>
-              <p>Endereço estrada das palmeiras</p>
+            </div>
+
+            <div class="card-body">
+              <div class="row">
+                <form>
+                  <div class="form-group">
+                    <label for="data">Data</label>
+                    <input id="data" type="date" [(ngModel)]="locacao.data_inicio" name="data" class="form-control"
+                      required />
+                  </div>
+                  <div class="form-group">
+                    <label for="horarioAbertura">Horário inicial</label>
+                    <input id="horarioAbertura" type="time" [(ngModel)]="locacao.horario_inicio" name="horarioAbertura"
+                      class="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <label for="horariofechamento">Horário final</label>
+                    <input id="horariofechamento" type="time" [(ngModel)]="locacao.horario_fim" name="horariofechamento"
+                      class="form-control" required />
+                  </div>
+                </form>
+
+                <div class="d-flex justify-content-center mt-4">
+                  <button class="btn btn-primary w-100 mt-1" (click)="alugar(campo)"> Alugar </button>
+
+                </div>
+                <div class="d-flex justify-content-center ">
+                  <button class="btn btn-secondary w-100 mt-1" (click)="espera(campo)"> Mostrar interesse </button>
+                </div>
+
+
+              </div>
             </div>
           </div>
         </div>
