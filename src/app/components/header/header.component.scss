@@ -1,0 +1,46 @@
+.navbar {
+  background-color: var(--bs-primary); // Fundo do menu
+  color: var(--color-light); // Cor do texto padrão
+
+  .navbar-brand {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-lg);
+    color: var(--color-light);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-secondary); // Cor ao passar o mouse
+    }
+  }
+
+  .navbar-nav {
+    .nav-link {
+      font-family: var(--font-secondary);
+      font-size: var(--font-size-base);
+      color: var(--color-light);
+      text-decoration: none;
+      margin-right: var(--spacing-md);
+
+      &:hover {
+        color: var(--color-secondary); // Cor de hover dos links
+      }
+
+      &.active {
+        color: var(--color-muted); // Cor do link ativo
+      }
+    }
+  }
+
+  .navbar-toggler {
+    border: 1px solid var(--color-light); // Botão de colapsar
+    color: var(--color-light);
+
+    &:hover {
+      background-color: var(--color-secondary); // Fundo ao hover
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(245,245,245,1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+  }
+}

@@ -1,0 +1,23 @@
+
+@import 'variables';
+.admin-theme{
+  body {
+    background-color: $color-light;
+    color: $color-dark;
+  }
+
+  .button-primary {
+    background-color: $admin-color-primary; // Cor primária para o admin
+    color: $color-light;
+    padding: $spacing-md;
+    border-radius: $border-radius-md;
+    border: none;
+    font-size: $font-size-base;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken($admin-color-primary, 10%);
+    }
+  }
+
+}

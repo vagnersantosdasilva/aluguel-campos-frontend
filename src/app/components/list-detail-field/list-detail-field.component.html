@@ -1,0 +1,36 @@
+<div class="list-detail-field">
+  <ng-container *ngIf="listaCampos.length > 0; else noCampos">
+    <div class="group-card" >
+      <div class="card" *ngFor="let campo of listaCampos">
+        <img
+          class="card-img-top"
+          [src]="campo.imagem_principal || 'assets/images/placeholder.png'"
+          [alt]="campo.nome"
+
+        />
+        <div class="card-body" style="max-height: 180px; min-height: 180px; overflow-y: auto;">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="card-title fw-bold mb-0" style="margin-right: auto;">{{ campo.nome }}</h5>
+            <p class="mb-0 fw-bold" style="margin-left: auto;">R$ {{ campo.preco | number: '1.2-2' }}</p>
+          </div>
+          <p class="card-text mt-3">{{ campo.descricao }}</p>
+        </div>
+        <div class="card-footer p-1" style="background-color: white;">
+          <a
+            href="#"
+            class="btn btn-primary w-100 fw-bold"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#canvas-1"
+            aria-controls="offcanvasRight"
+          >
+            Quero detalhes
+          </a>
+          <a class="btn btn-secondary w-100 fw-bold mt-1" (click)="alugar(campo)">Alugar</a>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noCampos>
+    <h3 class="d-flex justify-content-center">Nenhum campo disponível no momento!</h3>
+  </ng-template>
+</div>

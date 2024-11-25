@@ -1,0 +1,347 @@
+<div class="edit-field">
+
+  <!-- Tabs Navigation -->
+  <ul class="nav nav-tabs" id="tabMenu" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="info-basicas-tab" data-bs-toggle="tab" data-bs-target="#info-basicas"
+        type="button" role="tab" aria-controls="info-basicas" aria-selected="true">Informações Básicas</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="endereco-tab" data-bs-toggle="tab" data-bs-target="#endereco" type="button"
+        role="tab" aria-controls="endereco" aria-selected="false"
+        [disabled]="!campo.id || campo.id <= 0">Endereço</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="imagem-tab" data-bs-toggle="tab" data-bs-target="#imagem" type="button" role="tab"
+        aria-controls="imagem" aria-selected="true" [disabled]="!campo.id || campo.id <= 0">Imagens</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="grade-horarios-tab" data-bs-toggle="tab" data-bs-target="#grade-horarios"
+        type="button" role="tab" aria-controls="grade-horarios" aria-selected="false"
+        [disabled]="!campo.id || campo.id <= 0">Grade de Horários</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="grade-excecoes-tab" data-bs-toggle="tab" data-bs-target="#grade-excecoes"
+        type="button" role="tab" aria-controls="grade-excecoes" aria-selected="false"
+        [disabled]="!campo.id || campo.id <= 0">Grade de Exceções</button>
+    </li>
+  </ul>
+
+  <!-- Tabs Content -->
+  <div class="tab-content mt-3" id="tabContent">
+    <!-- Informações Básicas -->
+    <div class="tab-pane fade show active" id="info-basicas" role="tabpanel" aria-labelledby="info-basicas-tab">
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <!-- Primeira linha -->
+            <div class="row">
+              <div class="form-group col-lg-6 col-md-6 col-12">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" class="form-control" [(ngModel)]="campo.nome" name="nome" required>
+              </div>
+              <div class="form-group col-lg-6 col-md-6 col-12">
+                <label for="descricao">Descrição</label>
+                <input type="text" id="descricao" class="form-control" [(ngModel)]="campo.descricao" name="descricao"
+                  required>
+              </div>
+            </div>
+            <!-- Segunda linha -->
+            <div class="row">
+              <div class="form-group col-lg-3 col-md-3 col-12">
+                <label for="tipo">Tipo</label>
+                <input type="text" id="tipo" class="form-control" [(ngModel)]="campo.tipo" name="tipo" required>
+              </div>
+              <div class="form-group col-lg-3 col-md-3 col-12">
+                <label for="dimensoes">Dimensões</label>
+                <input type="text" id="dimensoes" class="form-control" [(ngModel)]="campo.dimensoes" name="dimensoes"
+                  required>
+              </div>
+              <div class="form-group col-lg-3 col-md-3 col-12">
+                <label for="iluminacao">Iluminação</label>
+                <select class="form-select" [(ngModel)]="campo.iluminacao" name="iluminacao">
+                  <option [value]="true">Sim</option>
+                  <option [value]="false">Não</option>
+                </select>
+              </div>
+              <div class="form-group col-lg-3 col-md-3 col-12">
+                <label for="preco">Preço</label>
+                <input type="number" step="0.01" id="preco" class="form-control" [(ngModel)]="campo.preco" name="preco"
+                  required>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <!-- Footer -->
+          <div class="row mt-4">
+            <div class="d-flex justify-content-between align-items-center">
+
+              <div class="d-flex gap-2">
+                <button class="btn btn-secondary w-25" (click)="newCampo()" >Novo</button>
+                <button class="btn btn-secondary w-25" (click)="deleteCampo()" [disabled]="campo.id && campo.id===0" >Excluir</button>
+                <button class="btn btn-secondary w-25" (click)="clearCampo()">Limpar</button>
+                <button class="btn btn-primary w-25" (click)="saveCampo()">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grade de Horários -->
+    <div class="tab-pane fade" id="grade-horarios" role="tabpanel" aria-labelledby="grade-horarios-tab">
+      <div class="card">
+        <div class="card-body">
+
+          <!-- Horários para cada dia da semana -->
+          <div class="row">
+            <div class="col-lg-12" *ngFor="let dia of diasSemana; let i = index">
+              <div class="row mb-3">
+                <div class="col-md-4">
+                  <label></label>
+                  <input type="text" [id]="'dia-' + i" class="form-control" [value]="dia" disabled>
+                </div>
+                <div class="col-md-4">
+                  <label [for]="'horario-abertura-' + i">Horário de Abertura</label>
+                  <input type="time" [id]="'horario-abertura-' + i" class="form-control"
+                    [(ngModel)]="gradeHorarios[i].horario_abertura" name="horarioAbertura{{i}}">
+                </div>
+                <div class="col-md-4">
+                  <label [for]="'horario-fechamento-' + i">Horário de Fechamento</label>
+                  <input type="time" [id]="'horario-fechamento-' + i" class="form-control"
+                    [(ngModel)]="gradeHorarios[i].horario_fechamento" name="horarioFechamento{{i}}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <!-- Footer -->
+          <div class="row mt-4">
+            <div class="d-flex justify-content-between align-items-center">
+
+              <div class="d-flex gap-2">
+                <button class="btn btn-secondary w-25" disabled>Novo</button>
+                <button class="btn btn-secondary w-25" disabled>Excluir</button>
+                <button class="btn btn-secondary w-25" (click)="clearGradeHorarios()">Limpar</button>
+                <button class="btn btn-primary w-25" (click)="saveGradeHorarios()">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Endereço-->
+    <div class="tab-pane fade" id="endereco" role="tabpanel" aria-labelledby="endereco-tab">
+      <form>
+        <div class="card">
+          <div class="card-body">
+            <!-- Endereço -->
+            <div class="row">
+              <div class="form-group col-lg-11 col-md-11 col-12">
+                <label for="rua">Logradouro</label>
+                <input type="text" class="form-control" id="rua" [(ngModel)]="endereco.rua" required name="rua">
+              </div>
+              <div class="form-group col-lg-1 col-md-1 col-12">
+                <label for="numero">Número</label>
+                <input type="text" class="form-control" id="numero" [(ngModel)]="endereco.numero" required
+                  name="numero">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-4 col-md-4 col-12">
+                <label for="bairro">Bairro</label>
+                <input type="text" class="form-control" id="bairro" [(ngModel)]="endereco.bairro" required
+                  name="bairro">
+              </div>
+              <div class="form-group col-lg-4 col-md-4 col-12">
+                <label for="cidade">Cidade</label>
+                <input type="text" class="form-control" id="cidade" [(ngModel)]="endereco.cidade" required
+                  name="cidade">
+              </div>
+              <div class="form-group col-lg-4 col-md-4 col-12">
+                <label for="estado">Estado</label>
+                <input type="text" class="form-control" id="estado" [(ngModel)]="endereco.estado" required
+                  name="estado">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-4 col-md-4 col-12">
+                <label for="cep">CEP</label>
+                <input type="text" class="form-control" id="cep" required [(ngModel)]="endereco.cep" name="cep">
+              </div>
+              <div class="form-group col-lg-4 col-md-4 col-12">
+                <label for="complemento">Complemento</label>
+                <input type="text" class="form-control" id="complemento" [(ngModel)]="endereco.complemento"
+                  name="complemento">
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <!-- Footer -->
+            <div class="row mt-4">
+              <div class="d-flex justify-content-between align-items-center">
+
+                <div class="d-flex gap-2">
+                  <button class="btn btn-secondary w-25" disabled>Novo</button>
+                  <button class="btn btn-secondary w-25" disabled>Excluir</button>
+                  <button class="btn btn-secondary w-25" (click)="clearEndereco()">Limpar</button>
+                  <button class="btn btn-primary w-25" (click)="saveEndereco()">Salvar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Grade de Exceções -->
+    <div class="tab-pane fade" id="grade-excecoes" role="tabpanel" aria-labelledby="grade-excecoes-tab">
+      <div class="card">
+        <div class="card-body">
+          <div class="excecoes-container">
+            <div class="row">
+              <div class="col-12 col-md-4">
+
+                <!-- Formulário para adicionar ou editar exceção -->
+                <h5 *ngIf="isEditing">Editar Exceção</h5>
+                <h5 *ngIf="!isEditing">Adicionar Nova Exceção</h5>
+                <form>
+                  <div class="form-group">
+                    <label for="data">Data</label>
+                    <input id="data" type="date" [(ngModel)]="excecaoForm.data" name="data" class="form-control"
+                      required />
+                  </div>
+                  <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <input id="descricao" type="text" [(ngModel)]="excecaoForm.descricao" name="descricao"
+                      class="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <label for="horarioAbertura">Horário de Abertura</label>
+                    <input id="horarioAbertura" type="time" [(ngModel)]="excecaoForm.horario_abertura"
+                      name="horario_abertura" class="form-control" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="horarioFechamento">Horário de Fechamento</label>
+                    <input id="horarioFechamento" type="time" [(ngModel)]="excecaoForm.horario_fechamento"
+                      name="horario_fechamento" class="form-control" required />
+                  </div>
+
+                </form>
+              </div>
+              <div class="col-12 col-md-8">
+                <!-- Tabela de exceções -->
+                <table class="table table-striped ">
+                  <thead>
+                    <tr>
+                      <th>Data</th>
+                      <th>Descrição</th>
+                      <th>Abertura</th>
+                      <th>Fechamento</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-scroll">
+                    <tr *ngFor="let excecao of excecoesHorarios">
+                      <td>{{ excecao.data | date: 'dd/MM/yyyy' }}</td>
+                      <td>{{ excecao.descricao }}</td>
+                      <td>{{ excecao.horario_abertura }}</td>
+                      <td>{{ excecao.horario_fechamento }}</td>
+                      <td>
+                        <button (click)="editExcecao(excecao)" class="btn btn-warning btn-sm  acoes">Editar</button>
+                        <button (click)="deleteExcecao(excecao.id||0)"
+                          class="btn btn-danger btn-sm acoes ">Deletar</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <!-- Footer -->
+          <div class="row mt-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex gap-2">
+                <button class="btn btn-secondary w-25" disabled> Novo</button>
+                <button class="btn btn-secondary w-25" disabled>Excluir</button>
+                <button type="button" class="btn btn-secondary w-25" (click)="cancelEdit()">Limpar</button>
+                <button type="button" class="btn btn-primary w-25" (click)="saveExcecao()">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Imagens -->
+    <div class="tab-pane fade" id="imagem" role="tabpanel" aria-labelledby="imagem-tab">
+      <div class="card">
+        <div class="card-body">
+          <h5>Imagem do Campo</h5>
+          <div class="row">
+            <div class="col col-4 ">
+              <form>
+                <div class="form-group">
+                  <label for="tipo">Tipo</label>
+                  <select class="form-select" [(ngModel)]="imagem.tipo" name="tipo">
+                    <option value="principal">Principal</option>
+                    <option value="secundaria">Secundário</option>
+                  </select>
+                </div>
+
+                <!-- Upload de nova imagem -->
+                <div class="form-group">
+                  <label for="novoArquivo">Adicionar Imagem</label>
+                  <input id="novoArquivo" type="file" (change)="onFileChange($event)" class="form-control"
+                    accept="image/jpeg" #fileInput />
+                </div>
+              </form>
+            </div>
+            <div class="col col-8 ">
+              <div class="text-center d-flex justify-content-center align-items-center" style="min-height: 250px;">
+                <img *ngIf="imagemPreview" [src]="imagemPreview" alt="Imagem do Campo" class="img-fluid rounded"
+                  style="height: 250px; object-fit: cover;" />
+              </div>
+            </div>
+            <div class="mt-3 galeria">
+              <div class="d-flex flex-row overflow-auto" style="min-height: 100px; border:1px rgb(177, 171, 171)">
+                <img *ngFor="let img of imagens" [src]="img.dados" alt="Miniatura" class="img-thumbnail m-2"
+                  style="width: 100px; cursor: pointer;" (click)="selectImagem(img)" />
+              </div>
+
+            </div>
+
+            <div class="card-footer">
+              <!-- Footer -->
+              <div class="row mt-4">
+                <div class="d-flex justify-content-between align-items-center">
+
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-secondary w-25" (click)="newImagem()">Novo</button>
+                    <button class="btn btn-secondary w-25" (click)="deleteImagem()"
+                      [disabled]="imagem.id ===0 ">Excluir</button>
+                    <button class="btn btn-secondary w-25" (click)="clearImagem()">Limpar</button>
+                    <button class="btn btn-primary w-25"
+                      [disabled]="imagem.tipo.length===0 || this.imagem.dados.length===0"
+                      (click)="saveImagem()">Salvar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>

@@ -1,0 +1,41 @@
+<div class="aluguel">
+  <div>
+    <div>
+      <div class="row">
+        <div class="col-8">
+          <div class="card">
+            <div class="card-body">
+              <div class="text-center d-flex justify-content-center align-items-center w-100"
+                style="min-height: 250px;">
+                <img *ngIf="imagemPreview" [src]="imagemPreview" alt="Imagem do Campo" class="img-fluid rounded"
+                  style="height: 250px; object-fit: cover;" />
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="mt-3 ">
+                <div class="d-flex flex-row overflow-auto" style="min-height: 100px; border:1px rgb(177, 171, 171)">
+                  <img *ngFor="let img of campo.imagens" [src]="img.dados" alt="Miniatura" class="img-thumbnail m-2"
+                    style="width: 100px; cursor: pointer;" (click)="selectImagem(img)" />
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-4">
+          <div class="card">
+            <div class="card-header">
+              <h4>
+                {{campo.nome}}
+              </h4>
+              <p>Endereço estrada das palmeiras</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

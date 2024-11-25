@@ -1,1 +1,89 @@
-/* You can add global styles to this file, and also import other style files */
+:root{
+// FONTES GLOBAIS
+  --font-primary: 'Roboto', sans-serif;
+  --font-secondary: 'Open Sans', sans-serif;
+
+  // TAMANHOS DE FONTES
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 4rem;
+
+// Tema Admin - Laranja
+
+[data-bs-theme="admin"] {
+
+
+  --bs-primary: #FFA500; // Cor primária laranja
+  --bs-primary-light: #FFB74D; // Laranja mais claro
+  --bs-primary-dark: #FF5722; // Laranja mais escuro
+
+  --bs-background: #FF5722; // Fundo laranja
+  --bs-text-color: #ffffff; // Texto branco
+  --bs-text-color-secondary : #333;
+
+
+  // .nav-link, .card-body, .offcanvas, .accordion, .btn {
+  //   --bs-nav-link-color: white;
+  //   --bs-card-color: #FF5722;
+  //   --bs-offcanvas-color: #FF5722;
+  //   --bs-body-color: white;
+  // }
+
+  body {
+    background-color: var(--bs-background);
+    color: var(--bs-text-color);
+  }
+
+  .btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--bs-primary-light);
+    border-color: var(--bs-primary-light);
+  }
+}
+
+// Tema Usuário Padrão - Azul Claro
+[data-bs-theme="user"] {
+
+
+  --bs-primary: #87CEFA; // Cor primária azul claro
+  --bs-primary-light: #B0E0E6; // Azul mais claro
+  --bs-primary-dark: #4682B4; // Azul mais escuro
+
+  --bs-background: #ADD8E6; // Fundo azul claro
+  --bs-text-color: #333333; // Texto escuro
+  --bs-text-color-secondary : #333;
+
+  .nav-link, .card-body, .offcanvas, .accordion, .btn {
+    --bs-nav-link-color: #333333;
+    --bs-card-color: #ffffff;
+    --bs-offcanvas-color: #ADD8E6;
+    --bs-body-color: #333333;
+  }
+
+  body {
+    background-color: var(--bs-background);
+    color: var(--bs-text-color);
+  }
+
+  .btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--bs-primary-light);
+    border-color: var(--bs-primary-light);
+  }
+}
+}
